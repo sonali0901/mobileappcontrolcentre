@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <link href="{% static "infohub/bootstrap-3.3.5-dist/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "infohub/bootstrap-css-custom/navbar-default.css" %}" rel="stylesheet">
+        <link href="{% static "infohub/bootstrap-css-custom/sticky-footer.css" %}" rel="stylesheet">
+        <link href="{% static "infohub/bootstrap-css-custom/well.css" %}" rel="stylesheet">
+        <link href="{% static "infohub/css/navbar-btn.css" %}" rel="stylesheet">
+        <link href="{% static "infohub/css/text-color.css" %}" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'webhub:dashboard' %}">
+                        <img class="navbar-brand-img" src="{% static "infohub/img/logo.gif" %}">
+                    </a>
+                    <a class="navbar-brand hidden-xs" href="{% url 'webhub:dashboard' %}"><h1>Mobile App Control Center</h1></a>
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="navbar-collapse collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav navbar-right text-uppercase">
+                            <li>
+                                <div class="navbar-btn-border">
+                                    <!--Update profile url so that its not hardcoded-->
+                                    <a href="/profile/?id={{ user.id }}">
+                                        <h4 class="navbar-btn-text">Profile</h4>
+                                    </a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="navbar-btn-border">
+                                    <a href="{% url 'webhub:logout_do' %}">
+                                        <h4 class="navbar-btn-text">Log Out</h4>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <a href="{% url 'webhub:aboutPC' %}"><h4 class="footer-mid-text">About Peace Corps</h4></a>
+                <h4 class="footer-mid-text"> | </h4>
+                <a href="{% url 'webhub:policies' %}"><h4 class="footer-mid-text">Policies</h4></a>
+                <h4 class="footer-mid-text"> | </h4>
+                <a href="{% url 'webhub:details' %}"><h4 class="footer-mid-text">Important Details</h4></a>
+                <h4 class="footer-mid-text"> | </h4>
+                <a href="{% url 'webhub:helpPC' %}"><h4 class="footer-mid-text">Help</h4></a>
+                <p class="footer-small-text">&copy;2015 PeaceCorps</p>
+                <a href="#">Return to Top</a>
+            </div>
+        </footer>
+    </body>
+</html>
